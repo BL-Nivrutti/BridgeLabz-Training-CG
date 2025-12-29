@@ -18,24 +18,23 @@ public static void main(String[] args) {
 	
 	System.out.println("OOPS");
 	
-	String[] banner = buildBanner();
+	CharacterPattern[] patterns = createCharacterPatterns();
+	String[] banner = buildBanner(patterns);
 	printBanner(banner);
 }
 
-private static String[] buildBanner() {
-	String[] O = getOPattern();
-	String[] P = getPPattern();
-	String[] S = getSPattern();
-	
+private static String[] buildBanner(CharacterPattern[] patterns) {
 	String[] banner = new String[7];
-	
-	//construct banner line by line
-	for(int i=0; i<7;i++)
-	{
-		banner[i] = O[i]+"  "+O[i]+"  "+P[i]+"  "+S[i];
-	}
-	
-	return banner;
+
+    for (int i = 0; i < 7; i++) {
+        banner[i] =
+                patterns[0].getPattern()[i] + "  " +
+                patterns[1].getPattern()[i] + "  " +
+                patterns[2].getPattern()[i] + "  " +
+                patterns[3].getPattern()[i];
+    }
+
+    return banner;
 }
 
 //print the banner
@@ -46,39 +45,78 @@ private static void printBanner(String[] banner) {
 }
 
 //7 × 9 block-style letters
-private static String[] getOPattern() {
-return new String[]{
-        "  *****  ",
-        "**     **",
-        "**     **",
-        "**     **",
-        "**     **",
-        "**     **",
-        "  *****  "
-};
+private static CharacterPattern[] createCharacterPatterns() {
+
+    return new CharacterPattern[] {
+
+        new CharacterPattern('O', new String[] {
+            "  *****  ",
+            "**     **",
+            "**     **",
+            "**     **",
+            "**     **",
+            "**     **",
+            "  *****  "
+        }),
+
+        new CharacterPattern('O', new String[] {
+            "  *****  ",
+            "**     **",
+            "**     **",
+            "**     **",
+            "**     **",
+            "**     **",
+            "  *****  "
+        }),
+
+        new CharacterPattern('P', new String[] {
+            " ******  ",
+            " **    **",
+            " **    **",
+            " ******  ",
+            " **      ",
+            " **      ",
+            " **      "
+        }),
+
+        new CharacterPattern('S', new String[] {
+            "  *****  ",
+            " **      ",
+            " **      ",
+            "  *****  ",
+            "      ** ",
+            "      ** ",
+            "  *****  "
+        })
+    };
 }
 
-private static String[] getPPattern() {
-return new String[]{
-        " ******  ",
-        " **    ** ",
-        " **    ** ",
-        " ******  ",
-        " **       ",
-        " **       ",
-        " **       "
-};
-}
-private static String[] getSPattern() {
-return new String[]{
-        "  *****  ",
-        " **       ",
-        " **       ",
-        "  *****  ",
-        "      **  ",
-        "      **  ",
-        "  *****  "
-};
+
+private static class CharacterPattern {
+
+    private final char character;
+    private final String[] pattern;
+
+    /**
+     * Constructs a CharacterPattern object.
+     *
+     * @param character banner character
+     * @param pattern 7×9 pattern for the character
+     */
+    public CharacterPattern(char character, String[] pattern) {
+        this.character = character;
+        this.pattern = pattern;
+    }
+
+ //returns the banner pattern row
+    public String[] getPattern() {
+        return pattern;
+    }
+
+//returns the Character
+    public char getCharacter() {
+        return character;
+    }
 }
 	
 }
