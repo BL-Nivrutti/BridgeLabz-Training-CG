@@ -17,50 +17,68 @@ public class OOPsBannerApps {
 public static void main(String[] args) {
 	
 	System.out.println("OOPS");
-	// 7 × 9 block-style letters
-    String[] O = {
-            "  *****  ",
-            "**     **",
-            "**     **",
-            "**     **",
-            "**     **",
-            "**     **",
-            "  *****  "
-    };
+	
+	String[] banner = buildBanner();
+	printBanner(banner);
+}
 
-    String[] P = {
-            " ******  ",
-            " **    ** ",
-            " **    ** ",
-            " ******  ",
-            " **       ",
-            " **       ",
-            " **       "
-    };
+private static String[] buildBanner() {
+	String[] O = getOPattern();
+	String[] P = getPPattern();
+	String[] S = getSPattern();
+	
+	String[] banner = new String[7];
+	
+	//construct banner line by line
+	for(int i=0; i<7;i++)
+	{
+		banner[i] = O[i]+"  "+O[i]+"  "+P[i]+"  "+S[i];
+	}
+	
+	return banner;
+}
 
-    String[] S = {
-            "  *****  ",
-            " **       ",
-            " **       ",
-            "  *****  ",
-            "      **  ",
-            "      **  ",
-            "  *****  "
-    };
+//print the banner
+private static void printBanner(String[] banner) {
+	for(String line : banner) {
+		System.out.println(line);
+	}
+}
 
+//7 × 9 block-style letters
+private static String[] getOPattern() {
+return new String[]{
+        "  *****  ",
+        "**     **",
+        "**     **",
+        "**     **",
+        "**     **",
+        "**     **",
+        "  *****  "
+};
+}
 
-    // Final banner rows
-    String[] banner = new String[7];
-
-    // Build banner line by line
-    for (int i = 0; i < 7; i++) {
-        banner[i] = String.join("  ", O[i], O[i], P[i], S[i]);
-    }
-
-    // Print banner
-    for (String line : banner) {
-        System.out.println(line);
-    }
+private static String[] getPPattern() {
+return new String[]{
+        " ******  ",
+        " **    ** ",
+        " **    ** ",
+        " ******  ",
+        " **       ",
+        " **       ",
+        " **       "
+};
+}
+private static String[] getSPattern() {
+return new String[]{
+        "  *****  ",
+        " **       ",
+        " **       ",
+        "  *****  ",
+        "      **  ",
+        "      **  ",
+        "  *****  "
+};
 }
 	
 }
